@@ -8,27 +8,30 @@ https://docs.bazel.build/versions/master/install.html
 
 **Instructions**
 0 - Clone this project into your Bazel Workspace folder.
+
 1 - Run ./configure inside the tensorflow folder choosing the default options and not installing anything extra.
-2 - Run the following command from the tensorflow root folder
-(Note it will take quite some time to finish):
+
+2 - Run the following command from the tensorflow root folder:
+
+```
 "bazel build --config opt //tensorflow/tools/lib_package:libtensorflow"
+```
 **-**
 This will compile the C api together with the C++ core framework. Additionally it will also transform any .proto files and required operations into .cc and .h files which we will need. These will present in the "tensorflow/bazel-genfiles" folder.
 **--**
 3 - Run "tensorflow/contrib/makefile/build_all_ios.sh” from the tensor flow root folder.
 
 The resulting libs:
+```
 "tensorflow/contrib/makefile/gen/lib/libtensorflow-core.a"
 "tensorflow/contrib/makefile/gen/protobuf_ios/lib/libprotobuf.a"
 "tensorflow/contrib/makefile/gen/protobuf_ios/lib/libprotobuf-lite.a"
+```
 
-**Changes in this fork related to the 1.2.1 tensor flow source version** 
-Just listed the files i changed in this fork of tensorflow.
-/Users/Andre/BazelWorkSpace/TensorFlowForked/tensorflow/contrib/makefile/Makefile
-/Users/Andre/BazelWorkSpace/TensorFlowForked/tensorflow/contrib/makefile/tf_op_files.txt
+# Changes to the makefile ** 
 
-# Changes to the makefile
 Added the c_api.cc file which defines the C API and its dependencies, and the .c and .h files from the bazel-genfiles folder.
+
 ```
 TF_BAZEL_GEN_SRCS :=\
 $(wildcard bazel-genfiles/tensorflow/core/*.cc) \
@@ -80,7 +83,6 @@ tensorflow/contrib/boosted_trees/ops/split_handler_ops.cc
 tensorflow/contrib/boosted_trees/ops/stats_accumulator_ops.cc
 tensorflow/contrib/boosted_trees/ops/training_ops.cc
 ```
-Compiled and ran with a previous tensorflow version that did not need these operations.
 
 # Changes to the tf_proto_files.txt
 Removed
@@ -90,10 +92,12 @@ tensorflow/contrib/boosted_trees/proto/quantiles.proto
 tensorflow/contrib/boosted_trees/proto/split_info.proto
 tensorflow/contrib/boosted_trees/proto/tree_config.proto
 ```
+
 Added
 ```
 tensorflow/core/protobuf/saved_model.proto
 ```
-
+#Notes
+Eventually more operations can be removed from the tf_op_files.txt and tf_proto_files to reduce the final size of the .a library.
 
 
