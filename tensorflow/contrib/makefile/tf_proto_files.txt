@@ -1,13 +1,10 @@
-tensorflow/contrib/boosted_trees/proto/learner.proto
-tensorflow/contrib/boosted_trees/proto/quantiles.proto
-tensorflow/contrib/boosted_trees/proto/split_info.proto
-tensorflow/contrib/boosted_trees/proto/tree_config.proto
 tensorflow/core/util/test_log.proto
 tensorflow/core/util/saved_tensor_slice.proto
 tensorflow/core/util/memmapped_file_system.proto
 tensorflow/core/util/event.proto
 tensorflow/core/protobuf/tensorflow_server.proto
 tensorflow/core/protobuf/saver.proto
+tensorflow/core/protobuf/saved_model.proto
 tensorflow/core/protobuf/queue_runner.proto
 tensorflow/core/protobuf/named_tensor.proto
 tensorflow/core/protobuf/meta_graph.proto

@@ -505,30 +505,38 @@ TF_CC_SRCS += tensorflow/core/common_runtime/gpu/gpu_tracer.cc
 TF_CC_SRCS += $(shell cat $(MAKEFILE_DIR)/tf_op_files.txt)
 PBT_CC_SRCS := $(shell cat $(MAKEFILE_DIR)/tf_pb_text_files.txt)
 PROTO_SRCS := $(shell cat $(MAKEFILE_DIR)/tf_proto_files.txt)
+
+TF_I_SRCS_EXCLUDE := \
+$(wildcard tensorflow/cc/ops/const_op_test.cc) 
+
+# interface source files
+TF_I_SRCS := \
+$(wildcard tensorflow/c/c_api.cc) \
+$(wildcard tensorflow/c/checkpoint_reader.cc) \
+$(wildcard tensorflow/c/tf_status_helper.cc) \
+$(wildcard tensorflow/cc/saved_model/loader.cc) 
+#$(wildcard tensorflow/cc/framework/scope.cc) \
+#$(wildcard tensorflow/cc/framework/ops.cc) \
+#$(wildcard tensorflow/cc/framework/gradients.cc) \
+#$(wildcard tensorflow/cc/framework/grad_op_registry.cc) \
+#$(wildcard tensorflow/cc/ops/*.cc) 
+TF_I_SRCS := $(filter-out $(TF_I_SRCS_EXCLUDE), $(TF_I_SRCS))
+
 BENCHMARK_SRCS := \
 tensorflow/core/util/reporter.cc \
 tensorflow/tools/benchmark/benchmark_model.cc \
 tensorflow/tools/benchmark/benchmark_model_main.cc
 
-ifdef HEXAGON_LIBS
-	TF_CC_SRCS += \
-tensorflow/cc/framework/scope.cc \
-tensorflow/cc/framework/ops.cc \
-tensorflow/cc/ops/const_op.cc \
-tensorflow/core/kernels/hexagon/graph_transfer_utils.cc \
-tensorflow/core/kernels/hexagon/graph_transferer.cc \
-tensorflow/core/kernels/hexagon/hexagon_control_wrapper.cc \
-tensorflow/core/kernels/hexagon/hexagon_ops_definitions.cc \
-tensorflow/core/kernels/hexagon/hexagon_remote_fused_graph_executor_build.cc
-endif
+.PHONY: rsync -rupE bazel-genfiles/ .
 
 # File names of the intermediate files target compilation generates.
 TF_CC_OBJS := $(addprefix $(OBJDIR), $(TF_CC_SRCS:.cc=.o))
+TF_CCC_OBJS := $(addprefix $(OBJDIR), $(TF_I_SRCS:.cc=.o))
 PBT_GEN_FILES := $(addprefix $(PBTGENDIR), $(PBT_CC_SRCS))
 PBT_OBJS := $(addprefix $(OBJDIR), $(PBT_CC_SRCS:.cc=.o))
 PROTO_CC_SRCS := $(addprefix $(PROTOGENDIR), $(PROTO_SRCS:.proto=.pb.cc))
 PROTO_OBJS := $(addprefix $(OBJDIR), $(PROTO_SRCS:.proto=.pb.o))
-LIB_OBJS := $(PROTO_OBJS) $(TF_CC_OBJS) $(PBT_OBJS)
+LIB_OBJS := $(PROTO_OBJS) $(TF_CC_OBJS) $(TF_CCC_OBJS) $(PBT_OBJS) 
 BENCHMARK_OBJS := $(addprefix $(OBJDIR), $(BENCHMARK_SRCS:.cc=.o))
 
 .PHONY: clean cleantarget
@@ -637,7 +645,7 @@ cleantarget:
 $(DEPDIR)/%.d: ;
 .PRECIOUS: $(DEPDIR)/%.d
 
--include $(patsubst %,$(DEPDIR)/%.d,$(basename $(TF_CC_SRCS)))
+-include $(patsubst %,$(DEPDIR)/%.d,$(basename $(TF_CC_SRCS + TF_I_SRCS)))
 
 ifdef SUB_MAKEFILES
   $(warning "include sub makefiles, must not contain white spaces in the path:" $(SUB_MAKEFILES))
