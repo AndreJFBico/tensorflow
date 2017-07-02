@@ -4,6 +4,7 @@ tensorflow/core/util/memmapped_file_system.proto
 tensorflow/core/util/event.proto
 tensorflow/core/protobuf/tensorflow_server.proto
 tensorflow/core/protobuf/saver.proto
+tensorflow/core/protobuf/saved_model.proto
 tensorflow/core/protobuf/queue_runner.proto
 tensorflow/core/protobuf/named_tensor.proto
 tensorflow/core/protobuf/meta_graph.proto
