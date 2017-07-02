@@ -16,9 +16,9 @@ https://docs.bazel.build/versions/master/install.html
 ```
 "bazel build --config opt //tensorflow/tools/lib_package:libtensorflow"
 ```
-**-**
+
 This will compile the C api together with the C++ core framework. Additionally it will also transform any .proto files and required operations into .cc and .h files which we will need. These will present in the "tensorflow/bazel-genfiles" folder.
-**--**
+
 3 - Run "tensorflow/contrib/makefile/build_all_ios.sh” from the tensor flow root folder.
 
 The resulting libs:
