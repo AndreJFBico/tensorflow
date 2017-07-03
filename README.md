@@ -1,6 +1,6 @@
-TensorFlow compiling C api for ios.
-
-## Compiling tensorflow C API and C++ core into a static library for iOS
+## Compiling tensorflow C API into a static library
+Tested by linking this static library into an IOS xcode project and using the C functions directly, and also
+a Xamarin project together with tensorflowsharp. 
 
 **Instructions**
 
@@ -47,9 +47,7 @@ Added
 ```
 tensorflow/core/protobuf/saved_model.proto
 ```
-#Notes
+# Notes
 Eventually more operations can be removed from the tf_op_files.txt and tf_proto_files to reduce the final size of the .a library. 
 
-Also this tensorflow makefile already removes a lot of operations present in the library itself.
-
-
+The authors of this makefile already reduce a lot of operations available in the core framework.
