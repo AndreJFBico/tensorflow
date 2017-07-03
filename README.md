@@ -7,19 +7,12 @@ You need bazel and its dependencies.
 https://docs.bazel.build/versions/master/install.html
 
 **Instructions**
+
 0 - Clone this project into your Bazel Workspace folder.
 
 1 - Run ./configure inside the tensorflow folder choosing the default options and not installing anything extra.
 
-2 - Run the following command from the tensorflow root folder:
-
-```
-"bazel build --config opt //tensorflow/tools/lib_package:libtensorflow"
-```
-
-This will compile the C api together with the C++ core framework. Additionally it will also transform any .proto files and required operations into .cc and .h files which we will need. These will present in the "tensorflow/bazel-genfiles" folder.
-
-3 - Run "tensorflow/contrib/makefile/build_all_ios.sh” from the tensor flow root folder.
+2 - Run "tensorflow/contrib/makefile/build_all_ios.sh” from the tensor flow root folder.
 
 The resulting libs:
 ```
