@@ -15,7 +15,7 @@ The resulting libs will be:
 "tensorflow/contrib/makefile/gen/protobuf_ios/lib/libprotobuf-lite.a"
 ```
 
-# Changes to the makefile ** 
+# Changes to the makefile
 
 Added the c_api.cc file which defines the C API and its dependencies to the standard compilation flow.
 
