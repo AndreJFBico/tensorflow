@@ -1,6 +1,4 @@
 ## Compiling tensorflow C API into a static library
-Tested by linking this static library into an IOS xcode project and using the C functions directly, and also
-a Xamarin project together with tensorflowsharp. 
 
 **Instructions**
 
