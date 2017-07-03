@@ -513,8 +513,6 @@ tensorflow/core/util/reporter.cc \
 tensorflow/tools/benchmark/benchmark_model.cc \
 tensorflow/tools/benchmark/benchmark_model_main.cc
 
-.PHONY: rsync -rupE bazel-genfiles/ .
-
 # File names of the intermediate files target compilation generates.
 TF_CC_OBJS := $(addprefix $(OBJDIR), $(TF_CC_SRCS:.cc=.o))
 TF_CCC_OBJS := $(addprefix $(OBJDIR), $(TF_I_SRCS:.cc=.o))
