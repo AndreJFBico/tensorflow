@@ -996,9 +996,9 @@ TF_CAPI_EXPORT extern void TF_AbortWhile(const TF_WhileParams* params);
 // supports. See
 // https://www.tensorflow.org/code/tensorflow/cc/gradients/README.md
 // for instructions on how to add C++ more gradients.
-TF_CAPI_EXPORT void TF_AddGradients(TF_Graph* g, TF_Output* y, int ny,
+/*TF_CAPI_EXPORT void TF_AddGradients(TF_Graph* g, TF_Output* y, int ny,
                                     TF_Output* x, int nx, TF_Output* dx,
-                                    TF_Status* status, TF_Output* dy);
+                                    TF_Status* status, TF_Output* dy);*/
 
 // TODO(josh11b): Register OpDef, available to all operations added
 // to this graph.

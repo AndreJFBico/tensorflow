@@ -2073,7 +2073,7 @@ void TF_FinishWhile(const TF_WhileParams* params, TF_Status* status,
 
 void TF_AbortWhile(const TF_WhileParams* params) { FreeWhileResources(params); }
 
-#ifndef __ANDROID__
+/*#ifndef __ANDROID__
 namespace {
 
 void OutputsFromTFOutputs(TF_Output* tf_outputs, int n, TF_Status* status,
@@ -2094,9 +2094,9 @@ void TFOutputsFromOutputs(const std::vector<tensorflow::Output>& outputs,
 }
 
 }  // namespace
-#endif  // __ANDROID__
+#endif*/  // __ANDROID__
 
-void TF_AddGradients(TF_Graph* g, TF_Output* y, int ny, TF_Output* x, int nx,
+/*void TF_AddGradients(TF_Graph* g, TF_Output* y, int ny, TF_Output* x, int nx,
                      TF_Output* dx, TF_Status* status, TF_Output* dy) {
 #ifdef __ANDROID__
   status->status = tensorflow::errors::Unimplemented(
@@ -2140,7 +2140,7 @@ void TF_AddGradients(TF_Graph* g, TF_Output* y, int ny, TF_Output* x, int nx,
   // Unpack the results from grad_outputs_arg.
   TFOutputsFromOutputs(dy_arg, dy);
 #endif  // __ANDROID__
-}
+}*/
 
 // TF_Session functions ----------------------------------------------
 
