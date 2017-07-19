@@ -47,7 +47,14 @@ Added
 ```
 tensorflow/core/protobuf/saved_model.proto
 ```
-# Notes
-Eventually more operations can be removed from the tf_op_files.txt and tf_proto_files to reduce the final size of the .a library. 
 
-The authors of this makefile already reduce a lot of operations available in the core framework.
+# Changes to the tensorflow source
+I had to remove the following operation from c_api.h and c_api.cc as it requires other code that doesn't seem to link properly for iOS. 
+
+Note: The original file also excluded this operation for android.
+```
+TF_AddGradients
+```
+
+# Notes
+Eventually more operations can be removed/added from the tf_op_files.txt and tf_proto_files depending on what is required.
